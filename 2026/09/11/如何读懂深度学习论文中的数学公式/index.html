@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>如何读懂深度学习论文中的数学公式 - 杨镇宇的技术博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="杨镇宇的技术博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="杨镇宇的技术博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"><meta property="og:type" content="blog"><meta property="og:title" content="如何读懂深度学习论文中的数学公式"><meta property="og:url" content="https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"><meta property="og:site_name" content="杨镇宇的技术博客"><meta property="og:description" content="阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://ascouter001.github.io/img/og_image.png"><meta property="article:published_time" content="2026-09-11T08:42:51.000Z"><meta property="article:modified_time" content="2026-09-11T08:43:01.674Z"><meta property="article:author" content="杨镇宇"><meta property="article:tag" content="论文阅读"><meta property="article:tag" content="深度学习"><meta property="article:tag" content="数学公式"><meta property="article:tag" content="科研方法"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://ascouter001.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"},"headline":"如何读懂深度学习论文中的数学公式","image":["https://ascouter001.github.io/img/og_image.png"],"datePublished":"2026-09-11T08:42:51.000Z","dateModified":"2026-09-11T08:43:01.674Z","author":{"@type":"Person","name":"杨镇宇"},"publisher":{"@type":"Organization","name":"杨镇宇的技术博客","logo":{"@type":"ImageObject","url":"https://ascouter001.github.io/img/logo.svg"}},"description":"阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"}</script><link rel="canonical" href="https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>如何读懂深度学习论文中的数学公式 - 杨镇宇的技术博客</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="杨镇宇的技术博客"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="杨镇宇的技术博客"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="description" content="阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"><meta property="og:type" content="blog"><meta property="og:title" content="如何读懂深度学习论文中的数学公式"><meta property="og:url" content="https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"><meta property="og:site_name" content="杨镇宇的技术博客"><meta property="og:description" content="阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://ascouter001.github.io/img/og_image.png"><meta property="article:published_time" content="2026-09-11T08:42:51.000Z"><meta property="article:modified_time" content="2026-09-11T10:23:11.132Z"><meta property="article:author" content="杨镇宇"><meta property="article:tag" content="论文阅读"><meta property="article:tag" content="深度学习"><meta property="article:tag" content="数学公式"><meta property="article:tag" content="科研方法"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://ascouter001.github.io/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"},"headline":"如何读懂深度学习论文中的数学公式","image":["https://ascouter001.github.io/img/og_image.png"],"datePublished":"2026-09-11T08:42:51.000Z","dateModified":"2026-09-11T10:23:11.132Z","author":{"@type":"Person","name":"杨镇宇"},"publisher":{"@type":"Organization","name":"杨镇宇的技术博客","logo":{"@type":"ImageObject","url":"https://ascouter001.github.io/img/logo.svg"}},"description":"阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。 因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。"}</script><link rel="canonical" href="https://ascouter001.github.io/2026/09/11/%E5%A6%82%E4%BD%95%E8%AF%BB%E6%87%82%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/"><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
   (function () {
       function switchTab() {
           if (!location.hash) {
@@ -29,14 +29,13 @@
       switchTab();
       window.addEventListener('hashchange', switchTab, false);
   })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="杨镇宇的技术博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2026-09-11T08:42:51.000Z" title="2026/9/11 16:42:51">2026-09-11</time>发表</span><span class="level-item"><time dateTime="2026-09-11T08:43:01.674Z" title="2026/9/11 16:43:01">2026-09-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span><span class="level-item">22 分钟读完 (大约3231个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">如何读懂深度学习论文中的数学公式</h1><div class="content"><p>阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。</p>
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="杨镇宇的技术博客" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">归档</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2026-09-11T08:42:51.000Z" title="2026/9/11 16:42:51">2026-09-11</time>发表</span><span class="level-item"><time dateTime="2026-09-11T10:23:11.132Z" title="2026/9/11 18:23:11">2026-09-11</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span><span class="level-item">22 分钟读完 (大约3311个字)</span></div></div><h1 class="title is-3 is-size-4-mobile">如何读懂深度学习论文中的数学公式</h1><div class="content"><p>阅读深度学习论文时，公式常常比正文更容易让人停下来。真正的困难通常不是计算，而是作者在一行公式里同时压缩了变量含义、张量形状、计算流程和建模目的。</p>
 <p>因此，读公式不必从推导开始。更有效的方法是先把它当成一段高度压缩的程序：找到输入、输出、参数和运算，再用上下文确认它解决了什么问题。</p>
 <span id="more"></span>
 
 <h2 id="1-先把公式看成一个接口"><a href="#1-先把公式看成一个接口" class="headerlink" title="1. 先把公式看成一个接口"></a>1. 先把公式看成一个接口</h2><p>看到下面这种表达：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ŷ = fθ(x)</span><br></pre></td></tr></table></figure>
-
-<p>可以先不关心 <code>f</code> 的内部细节，只把它翻译成一句话：模型 <code>f</code> 接收输入 <code>x</code>，使用参数 <code>θ</code> 计算预测结果 <code>ŷ</code>。</p>
+<p>$$<br>\hat{y}&#x3D;f_{\theta}(x)<br>$$</p>
+<p>可以先不关心 $f$ 的内部细节，只把它翻译成一句话：模型 $f$ 接收输入 $x$，使用参数 $\theta$ 计算预测结果 $\hat{y}$。</p>
 <p>此时优先回答四个问题：</p>
 <ol>
 <li>输入是什么，来自数据集还是上一层？</li>
@@ -55,47 +54,47 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><code>x</code>、<code>X</code></td>
+<td>$x$、$X$</td>
 <td>输入、样本或特征</td>
 <td>单个样本还是一个批次</td>
 </tr>
 <tr>
-<td><code>y</code></td>
+<td>$y$</td>
 <td>真实标签或目标值</td>
 <td>类别编号、向量还是连续值</td>
 </tr>
 <tr>
-<td><code>ŷ</code></td>
+<td>$\hat{y}$</td>
 <td>预测值</td>
 <td>模型原始输出还是处理后的概率</td>
 </tr>
 <tr>
-<td><code>θ</code></td>
+<td>$\theta$</td>
 <td>模型参数的集合</td>
 <td>是否包含权重和偏置</td>
 </tr>
 <tr>
-<td><code>W</code>、<code>b</code></td>
+<td>$W$、$b$</td>
 <td>权重矩阵和偏置</td>
 <td>形状是否与输入、输出匹配</td>
 </tr>
 <tr>
-<td><code>h</code>、<code>z</code></td>
+<td>$h$、$z$</td>
 <td>隐藏表示或中间结果</td>
 <td>来自哪一层，将送往哪里</td>
 </tr>
 <tr>
-<td><code>L</code> 或 <code>𝓛</code></td>
+<td>$L$ 或 $\mathcal{L}$</td>
 <td>损失函数</td>
 <td>对单个样本还是整个批次计算</td>
 </tr>
 <tr>
-<td><code>N</code>、<code>B</code></td>
+<td>$N$、$B$</td>
 <td>样本数或批大小</td>
 <td>求和、平均的范围是什么</td>
 </tr>
 <tr>
-<td><code>i</code>、<code>j</code>、<code>t</code></td>
+<td>$i$、$j$、$t$</td>
 <td>索引</td>
 <td>指样本、类别、位置还是时间步</td>
 </tr>
@@ -105,12 +104,10 @@
 
 <p>作者可能在不同章节复用同一个字母，所以变量表也要随着上下文更新，不能把某个符号的含义固定到底。</p>
 <h2 id="3-张量形状比字母名称更可靠"><a href="#3-张量形状比字母名称更可靠" class="headerlink" title="3. 张量形状比字母名称更可靠"></a>3. 张量形状比字母名称更可靠</h2><p>公式能不能计算，首先由形状决定。假设论文给出：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">X ∈ R^(B×D)</span><br><span class="line">W ∈ R^(D×K)</span><br><span class="line">b ∈ R^K</span><br><span class="line">H = XW + b</span><br></pre></td></tr></table></figure>
-
+<p>$$<br>\begin{aligned}<br>X &amp;\in \mathbb{R}^{B\times D}, \\<br>W &amp;\in \mathbb{R}^{D\times K}, \\<br>b &amp;\in \mathbb{R}^{K}, \\<br>H &amp;&#x3D; XW+b.<br>\end{aligned}<br>$$</p>
 <p>可以沿着维度检查：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(B×D) · (D×K) = (B×K)</span><br></pre></td></tr></table></figure>
-
-<p>因此 <code>H ∈ R^(B×K)</code>。其中 <code>b</code> 会广播到批次中的每个样本。</p>
+<p>$$<br>(B\times D)(D\times K)&#x3D;B\times K<br>$$</p>
+<p>因此 $H\in\mathbb{R}^{B\times K}$。其中 $b$ 会广播到批次中的每个样本。</p>
 <p>这一步不仅能帮助理解，还能发现很多阅读错误：</p>
 <ul>
 <li>把批次维和序列长度弄反；</li>
@@ -119,20 +116,15 @@
 <li>不知道求和或 Softmax 沿哪个维度进行。</li>
 </ul>
 <p>遇到复杂公式时，可以直接在每个变量下面标形状，再从内向外计算输出形状。它往往比逐字翻译公式更快。</p>
-<h2 id="4-读懂下标、上标和分隔符"><a href="#4-读懂下标、上标和分隔符" class="headerlink" title="4. 读懂下标、上标和分隔符"></a>4. 读懂下标、上标和分隔符</h2><h3 id="4-1-下标通常用于定位"><a href="#4-1-下标通常用于定位" class="headerlink" title="4.1 下标通常用于定位"></a>4.1 下标通常用于定位</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x_i       第 i 个元素</span><br><span class="line">X_(i,j)   矩阵第 i 行、第 j 列的元素</span><br><span class="line">x_t       第 t 个时间步的变量</span><br></pre></td></tr></table></figure>
-
+<h2 id="4-读懂下标、上标和分隔符"><a href="#4-读懂下标、上标和分隔符" class="headerlink" title="4. 读懂下标、上标和分隔符"></a>4. 读懂下标、上标和分隔符</h2><h3 id="4-1-下标通常用于定位"><a href="#4-1-下标通常用于定位" class="headerlink" title="4.1 下标通常用于定位"></a>4.1 下标通常用于定位</h3><p>$$<br>\begin{aligned}<br>x_i &amp;\quad \text{第 }i\text{ 个元素}, \\<br>X_{i,j} &amp;\quad \text{矩阵第 }i\text{ 行、第 }j\text{ 列的元素}, \\<br>x_t &amp;\quad \text{第 }t\text{ 个时间步的变量}.<br>\end{aligned}<br>$$</p>
 <p>下标具体代表什么，仍然要看作者在公式前后的定义。</p>
-<h3 id="4-2-上标不一定是乘方"><a href="#4-2-上标不一定是乘方" class="headerlink" title="4.2 上标不一定是乘方"></a>4.2 上标不一定是乘方</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">x²        x 的平方</span><br><span class="line">x^(i)     第 i 个样本（常见约定）</span><br><span class="line">X^T       X 的转置</span><br><span class="line">θ*        最优参数</span><br></pre></td></tr></table></figure>
-
-<p>括号上标经常用来标记样本、层或迭代次数。如果看到 <code>h^(l)</code>，它很可能表示第 <code>l</code> 层的隐藏表示，而不是 <code>h</code> 的 <code>l</code> 次方。</p>
-<h3 id="4-3-逗号、分号和竖线在区分角色"><a href="#4-3-逗号、分号和竖线在区分角色" class="headerlink" title="4.3 逗号、分号和竖线在区分角色"></a>4.3 逗号、分号和竖线在区分角色</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(x, y; θ)</span><br></pre></td></tr></table></figure>
-
-<p>逗号通常连接同一组变量，分号常被作者用来把数据 <code>x, y</code> 与参数 <code>θ</code> 分开。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pθ(y | x)</span><br></pre></td></tr></table></figure>
-
-<p>竖线在概率表达式中表示条件，即“给定 <code>x</code> 时 <code>y</code> 的概率”。需要注意，它在其他位置也可能表示绝对值或集合的大小：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">|x|       标量的绝对值</span><br><span class="line">|S|       集合 S 中元素的数量</span><br><span class="line">||x||₂    向量 x 的 L2 范数</span><br></pre></td></tr></table></figure>
-
+<h3 id="4-2-上标不一定是乘方"><a href="#4-2-上标不一定是乘方" class="headerlink" title="4.2 上标不一定是乘方"></a>4.2 上标不一定是乘方</h3><p>$$<br>\begin{aligned}<br>x^2 &amp;\quad x\text{ 的平方}, \\<br>x^{(i)} &amp;\quad \text{第 }i\text{ 个样本（常见约定）}, \\<br>X^{\mathsf T} &amp;\quad X\text{ 的转置}, \\<br>\theta^* &amp;\quad \text{最优参数}.<br>\end{aligned}<br>$$</p>
+<p>括号上标经常用来标记样本、层或迭代次数。如果看到 $h^{(l)}$，它很可能表示第 $l$ 层的隐藏表示，而不是 $h$ 的 $l$ 次方。</p>
+<h3 id="4-3-逗号、分号和竖线在区分角色"><a href="#4-3-逗号、分号和竖线在区分角色" class="headerlink" title="4.3 逗号、分号和竖线在区分角色"></a>4.3 逗号、分号和竖线在区分角色</h3><p>$$<br>f(x,y;\theta)<br>$$</p>
+<p>逗号通常连接同一组变量，分号常被作者用来把数据 $x,y$ 与参数 $\theta$ 分开。</p>
+<p>$$<br>p_{\theta}(y\mid x)<br>$$</p>
+<p>竖线在概率表达式中表示条件，即“给定 $x$ 时 $y$ 的概率”。需要注意，它在其他位置也可能表示绝对值或集合的大小：</p>
+<p>$$<br>\begin{aligned}<br>|x| &amp;\quad \text{标量的绝对值}, \\<br>|S| &amp;\quad \text{集合 }S\text{ 中元素的数量}, \\<br>\lVert x\rVert_2 &amp;\quad \text{向量 }x\text{ 的 L2 范数}.<br>\end{aligned}<br>$$</p>
 <h2 id="5-常见运算应该翻译成动作"><a href="#5-常见运算应该翻译成动作" class="headerlink" title="5. 常见运算应该翻译成动作"></a>5. 常见运算应该翻译成动作</h2><p>与其记忆符号的名称，不如把它们翻译成计算动作。</p>
 <table>
 <thead>
@@ -143,109 +135,102 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><code>Σ</code></td>
+<td>$\sum$</td>
 <td>把一组结果相加</td>
 <td>累积样本损失、聚合特征</td>
 </tr>
 <tr>
-<td><code>Π</code></td>
+<td>$\prod$</td>
 <td>把一组结果相乘</td>
 <td>联合概率、似然函数</td>
 </tr>
 <tr>
-<td><code>E[X]</code></td>
+<td>$\mathbb{E}[X]$</td>
 <td>对随机结果求平均</td>
 <td>期望损失、期望回报</td>
 </tr>
 <tr>
-<td><code>x ~ p</code></td>
-<td>从分布 <code>p</code> 中采样 <code>x</code></td>
+<td>$x\sim p$</td>
+<td>从分布 $p$ 中采样 $x$</td>
 <td>生成模型、强化学习</td>
 </tr>
 <tr>
-<td><code>log(x)</code></td>
+<td>$\log(x)$</td>
 <td>取对数</td>
 <td>把概率乘积转成求和</td>
 </tr>
 <tr>
-<td><code>exp(x)</code></td>
+<td>$\exp(x)$</td>
 <td>取指数</td>
 <td>Softmax、概率分布</td>
 </tr>
 <tr>
-<td><code>A ⊙ B</code></td>
+<td>$A\odot B$</td>
 <td>对应位置相乘</td>
 <td>门控、掩码、特征融合</td>
 </tr>
 <tr>
-<td><code>⟨u,v⟩</code></td>
+<td>$\langle u,v\rangle$</td>
 <td>向量内积</td>
 <td>相似度、注意力得分</td>
 </tr>
 <tr>
-<td><code>argmax</code></td>
+<td>$\operatorname*{argmax}$</td>
 <td>找到使结果最大的输入位置</td>
 <td>选择类别或动作</td>
 </tr>
 <tr>
-<td><code>∇θL</code></td>
+<td>$\nabla_{\theta}L$</td>
 <td>求损失对参数的梯度</td>
 <td>参数更新</td>
 </tr>
 </tbody></table>
-<p>还要区分 <code>max</code> 与 <code>argmax</code>：前者返回最大的数值，后者返回取得最大值的位置或变量。</p>
+<p>还要区分 $\max$ 与 $\operatorname*{argmax}$：前者返回最大的数值，后者返回取得最大值的位置或变量。</p>
 <h2 id="6-从模型输出一路读到参数更新"><a href="#6-从模型输出一路读到参数更新" class="headerlink" title="6. 从模型输出一路读到参数更新"></a>6. 从模型输出一路读到参数更新</h2><p>许多论文的训练目标都可以拆成三段。</p>
-<h3 id="6-1-前向计算"><a href="#6-1-前向计算" class="headerlink" title="6.1 前向计算"></a>6.1 前向计算</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ŷ = fθ(x)</span><br></pre></td></tr></table></figure>
-
+<h3 id="6-1-前向计算"><a href="#6-1-前向计算" class="headerlink" title="6.1 前向计算"></a>6.1 前向计算</h3><p>$$<br>\hat{y}&#x3D;f_{\theta}(x)<br>$$</p>
 <p>输入经过模型得到预测。</p>
 <h3 id="6-2-计算损失"><a href="#6-2-计算损失" class="headerlink" title="6.2 计算损失"></a>6.2 计算损失</h3><p>以均方误差为例：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">L = (1/N) Σ_i (y_i - ŷ_i)²</span><br></pre></td></tr></table></figure>
-
+<p>$$<br>L&#x3D;\frac{1}{N}\sum_{i&#x3D;1}^{N}\left(y_i-\hat{y}_i\right)^2<br>$$</p>
 <p>从内向外读：</p>
 <ol>
-<li><code>y_i - ŷ_i</code> 计算第 <code>i</code> 个样本的预测误差；</li>
+<li>$y_i-\hat{y}_i$ 计算第 $i$ 个样本的预测误差；</li>
 <li>平方后，正负误差不会互相抵消；</li>
-<li><code>Σ_i</code> 汇总所有样本；</li>
-<li>除以 <code>N</code> 得到平均损失。</li>
+<li>$\sum_{i&#x3D;1}^{N}$ 汇总所有样本；</li>
+<li>除以 $N$ 得到平均损失。</li>
 </ol>
-<h3 id="6-3-更新参数"><a href="#6-3-更新参数" class="headerlink" title="6.3 更新参数"></a>6.3 更新参数</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">θ ← θ - η∇θL</span><br></pre></td></tr></table></figure>
-
-<p>其中 <code>η</code> 是学习率，<code>∇θL</code> 描述参数变化对损失的影响。减去梯度方向，是为了让下一次计算的损失倾向于变小。</p>
+<h3 id="6-3-更新参数"><a href="#6-3-更新参数" class="headerlink" title="6.3 更新参数"></a>6.3 更新参数</h3><p>$$<br>\theta\leftarrow\theta-\eta\nabla_{\theta}L<br>$$</p>
+<p>其中 $\eta$ 是学习率，$\nabla_{\theta}L$ 描述参数变化对损失的影响。减去梯度方向，是为了让下一次计算的损失倾向于变小。</p>
 <p>把这三段连起来，就是最常见的训练闭环：</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入数据 → 模型预测 → 计算损失 → 求梯度 → 更新参数</span><br></pre></td></tr></table></figure>
 
-<h2 id="7-三个典型公式的拆解"><a href="#7-三个典型公式的拆解" class="headerlink" title="7. 三个典型公式的拆解"></a>7. 三个典型公式的拆解</h2><h3 id="7-1-线性层加激活函数"><a href="#7-1-线性层加激活函数" class="headerlink" title="7.1 线性层加激活函数"></a>7.1 线性层加激活函数</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H = ReLU(XW + b)</span><br></pre></td></tr></table></figure>
-
-<p>按执行顺序理解：先用 <code>W</code> 对输入 <code>X</code> 做线性变换，再加偏置 <code>b</code>，最后用 ReLU 把负值截断为 0。输出 <code>H</code> 是经过本层变换后的特征。</p>
-<p>这里要检查三个细节：<code>XW</code> 的形状是否成立、<code>b</code> 如何广播、ReLU 是否改变张量形状。</p>
-<h3 id="7-2-缩放点积注意力"><a href="#7-2-缩放点积注意力" class="headerlink" title="7.2 缩放点积注意力"></a>7.2 缩放点积注意力</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Attention(Q, K, V) = softmax(QK^T / √d_k)V</span><br></pre></td></tr></table></figure>
-
+<h2 id="7-三个典型公式的拆解"><a href="#7-三个典型公式的拆解" class="headerlink" title="7. 三个典型公式的拆解"></a>7. 三个典型公式的拆解</h2><h3 id="7-1-线性层加激活函数"><a href="#7-1-线性层加激活函数" class="headerlink" title="7.1 线性层加激活函数"></a>7.1 线性层加激活函数</h3><p>$$<br>H&#x3D;\operatorname{ReLU}(XW+b)<br>$$</p>
+<p>按执行顺序理解：先用 $W$ 对输入 $X$ 做线性变换，再加偏置 $b$，最后用 ReLU 把负值截断为 0。输出 $H$ 是经过本层变换后的特征。</p>
+<p>这里要检查三个细节：$XW$ 的形状是否成立、$b$ 如何广播、ReLU 是否改变张量形状。</p>
+<h3 id="7-2-缩放点积注意力"><a href="#7-2-缩放点积注意力" class="headerlink" title="7.2 缩放点积注意力"></a>7.2 缩放点积注意力</h3><p>$$<br>\operatorname{Attention}(Q,K,V)<br>&#x3D;\operatorname{softmax}\left(\frac{QK^{\mathsf T}}{\sqrt{d_k}}\right)V<br>$$</p>
 <p>不要一口气读完整行，可以按计算顺序拆开：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">S = QK^T              计算查询与键的匹配分数</span><br><span class="line">S&#x27; = S / √d_k         缩放分数，避免数值过大</span><br><span class="line">A = softmax(S&#x27;)       把每行分数转换成权重</span><br><span class="line">O = AV                 按权重汇总值向量</span><br></pre></td></tr></table></figure>
-
+<p>$$<br>\begin{aligned}<br>S &amp;&#x3D; QK^{\mathsf T} &amp;&amp; \text{计算查询与键的匹配分数}, \\<br>S’ &amp;&#x3D; \frac{S}{\sqrt{d_k}} &amp;&amp; \text{缩放分数，避免数值过大}, \\<br>A &amp;&#x3D; \operatorname{softmax}(S’) &amp;&amp; \text{把每行分数转换成权重}, \\<br>O &amp;&#x3D; AV &amp;&amp; \text{按权重汇总值向量}.<br>\end{aligned}<br>$$</p>
 <p>公式最终表达的是：先判断每个查询应该关注哪些位置，再对这些位置的信息进行加权汇总。</p>
-<h3 id="7-3-条件策略"><a href="#7-3-条件策略" class="headerlink" title="7.3 条件策略"></a>7.3 条件策略</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">πθ(M | X, Q)</span><br></pre></td></tr></table></figure>
-
+<h3 id="7-3-条件策略"><a href="#7-3-条件策略" class="headerlink" title="7.3 条件策略"></a>7.3 条件策略</h3><p>$$<br>\pi_{\theta}(M\mid X,Q)<br>$$</p>
 <p>可以拆成：</p>
 <ul>
-<li><code>π</code>：策略或概率模型；</li>
-<li><code>θ</code>：控制模型行为的参数；</li>
-<li><code>M</code>：待生成的动作或结果；</li>
-<li><code>X, Q</code>：模型已知的条件。</li>
+<li>$\pi$：策略或概率模型；</li>
+<li>$\theta$：控制模型行为的参数；</li>
+<li>$M$：待生成的动作或结果；</li>
+<li>$X,Q$：模型已知的条件。</li>
 </ul>
-<p>整体含义是：参数为 <code>θ</code> 的模型在给定 <code>X</code> 和 <code>Q</code> 时，对结果 <code>M</code> 分配的概率。至于 <code>M</code>、<code>X</code> 和 <code>Q</code> 在论文中具体代表什么，必须回到符号定义或任务描述中确认。</p>
+<p>整体含义是：参数为 $\theta$ 的模型在给定 $X$ 和 $Q$ 时，对结果 $M$ 分配的概率。至于 $M$、$X$ 和 $Q$ 在论文中具体代表什么，必须回到符号定义或任务描述中确认。</p>
 <h2 id="8-一套可重复使用的阅读流程"><a href="#8-一套可重复使用的阅读流程" class="headerlink" title="8. 一套可重复使用的阅读流程"></a>8. 一套可重复使用的阅读流程</h2><p>拿到新公式时，可以按下面的顺序处理。</p>
 <h3 id="第一步：读公式前后的两段文字"><a href="#第一步：读公式前后的两段文字" class="headerlink" title="第一步：读公式前后的两段文字"></a>第一步：读公式前后的两段文字</h3><p>作者通常会在公式前说明目的，在公式后解释变量。不要把公式从上下文中单独截出来研究。</p>
 <h3 id="第二步：圈出等号左边"><a href="#第二步：圈出等号左边" class="headerlink" title="第二步：圈出等号左边"></a>第二步：圈出等号左边</h3><p>等号左边通常是本公式要定义或计算的目标。先确定“最后要得到什么”。</p>
 <h3 id="第三步：标记变量角色"><a href="#第三步：标记变量角色" class="headerlink" title="第三步：标记变量角色"></a>第三步：标记变量角色</h3><p>区分输入、标签、参数、中间量、输出和超参数。没有定义的符号可以先打问号，继续在上下文、图注或附录中查找。</p>
 <h3 id="第四步：写出每个张量的形状"><a href="#第四步：写出每个张量的形状" class="headerlink" title="第四步：写出每个张量的形状"></a>第四步：写出每个张量的形状</h3><p>沿着矩阵乘法、拼接、求和和广播检查维度。如果维度对不上，通常说明某个符号的理解有误，或者论文省略了转置、批次维等细节。</p>
-<h3 id="第五步：按运算优先级拆成多行"><a href="#第五步：按运算优先级拆成多行" class="headerlink" title="第五步：按运算优先级拆成多行"></a>第五步：按运算优先级拆成多行</h3><p>给中间结果临时命名，把嵌套公式改写成类似伪代码的步骤。注意力公式的 <code>S → S&#39; → A → O</code> 就是一个例子。</p>
+<h3 id="第五步：按运算优先级拆成多行"><a href="#第五步：按运算优先级拆成多行" class="headerlink" title="第五步：按运算优先级拆成多行"></a>第五步：按运算优先级拆成多行</h3><p>给中间结果临时命名，把嵌套公式改写成类似伪代码的步骤。注意力公式的 $S\rightarrow S’\rightarrow A\rightarrow O$ 就是一个例子。</p>
 <h3 id="第六步：用一句话解释设计目的"><a href="#第六步：用一句话解释设计目的" class="headerlink" title="第六步：用一句话解释设计目的"></a>第六步：用一句话解释设计目的</h3><p>不要停留在“做了矩阵乘法”。继续问：这次乘法在比较什么、筛选什么或聚合什么？能够说明设计目的，才算从计算层面进入模型层面。</p>
 <h3 id="第七步：需要时再追推导和代码"><a href="#第七步：需要时再追推导和代码" class="headerlink" title="第七步：需要时再追推导和代码"></a>第七步：需要时再追推导和代码</h3><p>如果目标只是把握论文思路，到这里往往已经足够。如果需要复现，再去检查附录、源代码和原始引用，确认论文省略的实现细节。</p>
 <h2 id="9-容易踩到的几个坑"><a href="#9-容易踩到的几个坑" class="headerlink" title="9. 容易踩到的几个坑"></a>9. 容易踩到的几个坑</h2><h3 id="9-1-把-Softmax-输出直接当作可信概率"><a href="#9-1-把-Softmax-输出直接当作可信概率" class="headerlink" title="9.1 把 Softmax 输出直接当作可信概率"></a>9.1 把 Softmax 输出直接当作可信概率</h3><p>Softmax 会把一组分数归一化为和为 1 的非负数，但这不代表模型一定经过了良好的概率校准。它首先是模型输出的相对权重。</p>
-<h3 id="9-2-忽略运算所在的维度"><a href="#9-2-忽略运算所在的维度" class="headerlink" title="9.2 忽略运算所在的维度"></a>9.2 忽略运算所在的维度</h3><p><code>softmax(X)</code>、<code>ΣX</code> 和归一化操作都需要明确沿哪一维进行。对类别维和对序列维操作，语义可能完全不同。</p>
-<h3 id="9-3-把逐元素乘法和矩阵乘法混为一谈"><a href="#9-3-把逐元素乘法和矩阵乘法混为一谈" class="headerlink" title="9.3 把逐元素乘法和矩阵乘法混为一谈"></a>9.3 把逐元素乘法和矩阵乘法混为一谈</h3><p><code>A ⊙ B</code> 一般表示对应元素相乘；<code>AB</code> 或 <code>A @ B</code> 通常表示矩阵乘法。两者的形状要求和信息含义都不同。</p>
-<h3 id="9-4-只看公式，不看符号定义"><a href="#9-4-只看公式，不看符号定义" class="headerlink" title="9.4 只看公式，不看符号定义"></a>9.4 只看公式，不看符号定义</h3><p>同一个 <code>P</code> 可能表示概率、投影矩阵或位置编码。论文自己的定义始终优先于通用习惯。</p>
+<h3 id="9-2-忽略运算所在的维度"><a href="#9-2-忽略运算所在的维度" class="headerlink" title="9.2 忽略运算所在的维度"></a>9.2 忽略运算所在的维度</h3><p>$\operatorname{softmax}(X)$、$\sum X$ 和归一化操作都需要明确沿哪一维进行。对类别维和对序列维操作，语义可能完全不同。</p>
+<h3 id="9-3-把逐元素乘法和矩阵乘法混为一谈"><a href="#9-3-把逐元素乘法和矩阵乘法混为一谈" class="headerlink" title="9.3 把逐元素乘法和矩阵乘法混为一谈"></a>9.3 把逐元素乘法和矩阵乘法混为一谈</h3><p>$A\odot B$ 一般表示对应元素相乘；$AB$ 或代码中的 <code>A @ B</code> 通常表示矩阵乘法。两者的形状要求和信息含义都不同。</p>
+<h3 id="9-4-只看公式，不看符号定义"><a href="#9-4-只看公式，不看符号定义" class="headerlink" title="9.4 只看公式，不看符号定义"></a>9.4 只看公式，不看符号定义</h3><p>同一个 $P$ 可能表示概率、投影矩阵或位置编码。论文自己的定义始终优先于通用习惯。</p>
 <h3 id="9-5-一开始就执着于逐步证明"><a href="#9-5-一开始就执着于逐步证明" class="headerlink" title="9.5 一开始就执着于逐步证明"></a>9.5 一开始就执着于逐步证明</h3><p>推导可以解释公式为何成立，但未必能先回答它在模型里做什么。先建立整体数据流，再补数学细节，阅读通常会顺畅很多。</p>
 <h2 id="10-阅读完成后的自检清单"><a href="#10-阅读完成后的自检清单" class="headerlink" title="10. 阅读完成后的自检清单"></a>10. 阅读完成后的自检清单</h2><p>读完一个关键公式后，可以用下面的问题检查自己是否真的理解：</p>
 <ul>
@@ -303,6 +288,16 @@
                 }
                 $('.justified-gallery').justifiedGallery();
             }
-        });</script><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
+        });</script><!--!--><!--!--><script type="text/javascript" id="MathJax-script" async>MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      },
+      chtml: {
+        matchFontHeight: false
+      }
+    };</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/pjax.js"></script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script data-pjax src="/js/insight.js" defer></script><script data-pjax>document.addEventListener('DOMContentLoaded', function () {
             loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
         });</script></body></html>
